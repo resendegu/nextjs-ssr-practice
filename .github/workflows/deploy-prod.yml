@@ -1,0 +1,21 @@
+name: Deploy to Firebase Hosting on merge
+'on':
+  push:
+    branches:
+      - main
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    env:
+        GOOGLE_SERVICE_ACCOUNT: ${{secrets.GOOGLE_SERVICE_ACCOUNT}}
+        SITE_ID: ${{vars.SITE_ID}}
+        enable_webframeworks: true
+        ssr_region: us-central1
+    container:
+      image: resendegu/cli
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy to Firebase Hosting
+        run: |
+          deploy_firebase_hosting
