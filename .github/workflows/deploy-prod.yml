@@ -16,6 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build
+        run: |
+          npm ci
+          npm run build
       - name: Deploy to Firebase Hosting
         run: |
           deploy_firebase_hosting
